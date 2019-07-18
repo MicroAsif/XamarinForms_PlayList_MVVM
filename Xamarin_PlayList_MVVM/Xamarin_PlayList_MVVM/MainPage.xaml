@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:fontawesome="clr-namespace:FontAwesome"
+             mc:Ignorable="d"
+             x:Class="Xamarin_PlayList_MVVM.MainPage">
+
+    <ContentPage.Content>
+        <StackLayout>
+            <Button x:Name="btnAddPlayList" Text="{Static fontawesome:FontAwesomeIcons.PlusSolid}" TextColor="White" FontFamily="{StaticResource FontAwesomeSolid}"  Clicked="BtnAddPlayList_Clicked" 
+                    VerticalOptions="EndAndExpand"></Button>
+
+            
+            <ListView x:Name="listView" ItemSelected="ListView_ItemSelected" HasUnevenRows="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal" Padding="10">
+                                <StackLayout HorizontalOptions="Start">
+                                    <Label Text="{Binding Name}"  LineBreakMode="WordWrap" 
+                                   Style="{DynamicResource ListItemTextStyle}"  FontSize="16" TextColor="{Binding Color}" />
+                                </StackLayout>
+
+                                <Label x:Name="btnStart" VerticalOptions="Center" Text="{Static fontawesome:FontAwesomeIcons.HeartSolid}"  FontFamily="{StaticResource FontAwesomeSolid}"
+                                TextColor="{Binding Color}" HorizontalOptions="EndAndExpand"></Label>
+                            </StackLayout>
+                        </ViewCell>
+                       
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+
+</ContentPage>
