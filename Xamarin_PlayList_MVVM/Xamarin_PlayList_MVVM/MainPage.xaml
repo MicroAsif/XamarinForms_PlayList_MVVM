@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentPage Title="{Binding Path=PlayLists.Count, StringFormat='{0} PlayLists'}" xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -9,11 +9,12 @@
 
     <ContentPage.Content>
         <StackLayout>
-            <Button x:Name="btnAddPlayList" Text="{Static fontawesome:FontAwesomeIcons.PlusSolid}" TextColor="White" FontFamily="{StaticResource FontAwesomeSolid}"  Clicked="BtnAddPlayList_Clicked" 
+            <Button Text="{Static fontawesome:FontAwesomeIcons.PlusSolid}" TextColor="White" FontFamily="{StaticResource FontAwesomeSolid}" Command="{Binding AddPlayListCommand}"
                     VerticalOptions="EndAndExpand"></Button>
 
-            
-            <ListView x:Name="listView" ItemSelected="ListView_ItemSelected" HasUnevenRows="True">
+
+            <ListView  ItemsSource="{Binding PlayLists}" ItemSelected="ListView_ItemSelected" SelectedItem="{Binding SelectedPlayList, Mode=TwoWay}" 
+                       HasUnevenRows="True">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -21,7 +22,7 @@
                                 <StackLayout HorizontalOptions="Start">
                                     <Label Text="{Binding Name}"  LineBreakMode="WordWrap" 
                                    Style="{DynamicResource ListItemTextStyle}"  FontSize="16" TextColor="{Binding Color}" />
-                                </StackLayout>
+                                </StackLayout> 
 
                                 <Label x:Name="btnStart" VerticalOptions="Center" Text="{Static fontawesome:FontAwesomeIcons.HeartSolid}"  FontFamily="{StaticResource FontAwesomeSolid}"
                                 TextColor="{Binding Color}" HorizontalOptions="EndAndExpand"></Label>

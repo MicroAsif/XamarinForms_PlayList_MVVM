@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin_PlayList_MVVM.Models;
+using Xamarin_PlayList_MVVM.ViewModel;
 
 namespace Xamarin_PlayList_MVVM
 {
@@ -15,34 +16,21 @@ namespace Xamarin_PlayList_MVVM
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
-        private ObservableCollection<Playlist> _playLists = new ObservableCollection<Playlist>();
+       
         public MainPage()
         {
+            BindingContext = new PlayListsViewModel();
             InitializeComponent();
         }
 
         protected override void OnAppearing()
         {
-            listView.ItemsSource = _playLists;
             base.OnAppearing();
         }
-
-        private void BtnAddPlayList_Clicked(object sender, EventArgs e)
-        {
-            var newPlayList = "PlayList " + (_playLists.Count + 1);
-            _playLists.Add(new Playlist { Name = newPlayList });
-            this.Title = $"{_playLists.Count} Playlists";
-        }
-
         private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            if (e.SelectedItem == null)
-                return;
-
-            var playlist = e.SelectedItem as Playlist;
-            playlist.IsFavorite = !playlist.IsFavorite;
-            _playLists[e.SelectedItemIndex] = playlist;
-            listView.SelectedItem = null; 
+            (BindingContext as PlayListsViewModel).SelectPlayListCommand.Execute(e.SelectedItem as Playlist);
+            
         }
     }
 }
